@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: lake
+    #database: DEMO_DB_DEV
+    schema: SBB_SCHEMA
+    tables:
+      - name: bronze_table_meteo
+      - name: bronze_table_train

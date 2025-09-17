@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: fact_train
+    description: "Table de faits trains (Gold), prête pour les analyses de ponctualité et retards."
+    columns:
+      - name: station_name
+        description: "Nom de la station ou produit associé au train"
+        tests:
+          - not_null
+
+      - name: departure_day
+        description: "Jour de départ du train"
+        tests:
+          - not_null
+
+      - name: departure_time
+        description: "Horodatage du départ (timestamp)"
+        tests:
+          - not_null
+
+      - name: arrival_time
+        description: "Horodatage de l'arrivée (timestamp)"
+
+      - name: line
+        description: "Ligne ferroviaire"
+      
+      - name: stops_name
+        description: "Liste des arrêts desservis"
+
+      - name: status
+        description: "Statut du train (annulé, en retard, à l'heure...)"
+
+      - name: is_departure_late
+        description: "Indique si le départ est en retard"
+        tests:
+          - not_null
+
+      - name: is_arrival_late
+        description: "Indique si l’arrivée est en retard"
+        tests:
+          - not_null

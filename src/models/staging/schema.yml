@@ -1,0 +1,86 @@
+version: 2
+
+models:
+  - name: base_meteo
+    description: "Vue de base (Silver) sur les données météo brutes"
+    columns:
+      - name: station
+        description: "Code ou identifiant de la station météo"
+      - name: reference_timestamp
+        description: "Horodatage brut de la mesure"
+      - name: temperature
+        description: "Température brute"
+      - name: wind_speed
+        description: "Vitesse du vent brute"
+      - name: precipitation
+        description: "Précipitations brutes"
+      - name: snow_height
+        description: "Hauteur de neige brute"
+      - name: sunshine_duration
+        description: "Durée d'ensoleillement brute"
+
+  - name: stg_meteo
+    description: "Table staging (Silver) avec cast et normalisation des données météo"
+    columns:
+      - name: station_name
+        description: "Nom de la station météo"
+      - name: mesure_timestamp
+        description: "Horodatage converti au format timestamp"
+      - name: temperature_celsius
+        description: "Température en degrés Celsius"
+        tests:
+          - not_null
+      - name: wind_speed_km_h
+        description: "Vitesse du vent en km/h"
+      - name: precipitation
+        description: "Précipitations (mm)"
+      - name: snow_height
+        description: "Hauteur de neige (cm)"
+      - name: sunshine_hour_duration
+        description: "Durée d'ensoleillement (heures cumulées)"
+
+  - name: base_train
+    description: "Vue de base (Silver) sur les données train brutes"
+    columns:
+      - name: departure_day
+        description: "Jour de départ du train"
+      - name: hour_departure
+        description: "Heure de départ brute"
+      - name: hour_arrival
+        description: "Heure d'arrivée brute"
+      - name: id_product
+        description: "Identifiant du produit/train"
+      - name: line
+        description: "Ligne ferroviaire"
+      - name: stops_name
+        description: "Arrêts desservis"
+      - name: status
+        description: "Statut du train"
+      - name: late_departure
+        description: "Retard au départ (booléen brut)"
+      - name: late_arrival
+        description: "Retard à l’arrivée (booléen brut)"
+
+  - name: stg_train
+    description: "Table staging (Silver) avec conversion de dates et cast des colonnes train"
+    columns:
+      - name: departure_day
+        description: "Jour de départ du train (cast en date)"
+      - name: hour_departure_cast_function_timestamp
+        description: "Heure de départ convertie en timestamp"
+      - name: hour_arrival_cast_function_timestamp
+        description: "Heure d'arrivée convertie en timestamp"
+      - name: station_name
+        description: "Nom de la station (issu de id_product)"
+      - name: line
+        description: "Ligne ferroviaire"
+      - name: stops_name
+        description: "Liste des arrêts desservis"
+      - name: status
+        description: "Statut du train"
+      - name: is_departure_late
+        description: "Indique si le départ est en retard (boolean)"
+        tests:
+          - not_null
+      - name: is_arrival_late
+        description: "Indique si l’arrivée est en retard (boolean)"

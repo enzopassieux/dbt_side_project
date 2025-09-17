@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: fact_meteo
+    description: "Table de faits météo (Gold) construite à partir de stg_meteo. Contient les observations horodatées par station."
+    columns:
+      - name: station_name
+        description: "Nom de la station météo"
+        tests:
+          - not_null
+
+      - name: mesure_timestamp
+        description: "Horodatage unique de la mesure météo"
+        tests:
+          - not_null
+          - unique
+
+      - name: temperature_celsius
+        description: "Température mesurée en degrés Celsius"
+        tests:
+          - not_null
+
+      - name: wind_speed_km_h
+        description: "Vitesse moyenne du vent (km/h)"
+
+      - name: precipitation
+        description: "Précipitations sur la période (mm)"
+
+      - name: snow_height
+        description: "Hauteur de neige mesurée (cm)"
+
+      - name: sunshine_hour_duration
+        description: "Durée d’ensoleillement (heures cumulées)"

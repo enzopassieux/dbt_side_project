@@ -1,0 +1,19 @@
+my_profile:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: XULLDHX-UA62860
+      user: Enzopss
+      password: Callofduti64340
+      database: DEMO_DB_DEV
+      schema: SBB_SCHEMA
+      threads: 4
+    prod:  # additional prod target
+      type: snowflake
+      account: XULLDHX-UA62860
+      user: Enzopss
+      password: Callofduti64340
+      database: DEMO_DB_PROD
+      schema: SBB_SCHEMA
+      threads: 8
